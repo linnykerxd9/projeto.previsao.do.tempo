@@ -1,0 +1,37 @@
+<div class="container-fluid">
+  <div class="search-container">
+    <div class="row">
+      <div class="form-group pesquisaNome" >
+        <label>Pesquisar</label>
+        <div>
+            <input class="form-control" [formControl]="searchControl">
+                  <button class="btn btn-primary"
+                          [disabled]="!searchControl.valid"
+                          (click)="doSearch()"
+                          >Pesquisar
+                  </button>
+        </div>
+    </div>
+    <div class="form-group">
+      <label> Pesquisar com <i>autocomplete</i></label>
+      <jl-cities-typeahead [formControl]="searchControlWithAutoComplete"></jl-cities-typeahead>
+    </div>
+    </div>
+  </div>
+
+  <jl-loader *ngIf="loading$ | async"></jl-loader>
+
+  <div *ngIf="!(loading$ | async) && !(error$ | async) && !!cityWeather">
+        <jl-current-weather [cityWeather]="cityWeather"
+                            [isFavorite]="isCurrentFavorite$ | async"
+                            (toggleBookmark)="onToggleBookmark()"
+                            [unit]="unit$ | async">
+        </jl-current-weather>
+ </div>
+
+ <div *ngIf="!(loading$ | async) && error$ | async">
+  <a>Tentar Novamente</a>
+ </div>
+
+</div>
+

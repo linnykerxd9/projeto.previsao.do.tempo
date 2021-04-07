@@ -1,0 +1,10 @@
+.container-fluid {
+  height: calc(100vh - 56px);
+
+  > .row {
+    height: 100%;
+  }
+}
+li.nav-item a{
+  font-size: 22px;
+}
